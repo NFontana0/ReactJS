@@ -9,12 +9,19 @@ import '@fontsource/roboto/700.css';
 
 import { AccessAlarm, ThreeDRotation } from '@mui/icons-material';
 import Footer from './components/Footer';
-
+import ItemListContainer from './components/ItemListContainer';
 
 function App() {
+
+  function alertInicio() {
+    alert("Bienvenidos!");
+  }
+
   return (
     <div className="App">
       <NavBar />
+
+      <ItemListContainer alertInicio={alertInicio} />
 
       <div>
         <h1>Keki Lombo React</h1>
