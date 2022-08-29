@@ -10,12 +10,19 @@ import '@fontsource/roboto/700.css';
 import { AccessAlarm, ThreeDRotation } from '@mui/icons-material';
 import Footer from './components/Footer';
 import ItemListContainer from './components/ItemListContainer';
+import ItemCount from './components/ItemCount';
 
 function App() {
 
   function alertInicio() {
     alert("Bienvenidos!");
   }
+
+  let producto1 = { stock: 10, initial: 0};
+
+  function onAdd() {
+  }
+  
 
   return (
     <div className="App">
@@ -28,6 +35,8 @@ function App() {
         <p>Ke ago aka?</p>
         <p>No lo c vroh</p>
       </div>
+
+      <ItemCount item={producto1} onAdd={onAdd}  />
 
       <Footer />
 
