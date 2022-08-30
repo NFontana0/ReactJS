@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Icon from './Icon';
 
-export default function ButtonAppBar() {
+export default function NavBar({carrito}) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -26,7 +26,7 @@ export default function ButtonAppBar() {
             News
           </Typography>
           <Box sx={{ flexGrow: 0 }}>
-            <Icon cant={20} />
+            <Icon carrito={carrito} />
           </Box>
         </Toolbar>
       </AppBar>

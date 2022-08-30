@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import NavBar from './components/NavBar';
-
+import React, {useState, useEffect} from "react"
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -20,23 +20,19 @@ function App() {
 
   let producto1 = { stock: 10, initial: 0};
 
+  const [carrito, setCarrito] = useState (producto1.initial);
+
   function onAdd() {
   }
   
 
   return (
     <div className="App">
-      <NavBar />
+      <NavBar carrito={carrito} />
 
-      <ItemListContainer alertInicio={alertInicio} />
+      <ItemListContainer />
 
-      <div>
-        <h1>Keki Lombo React</h1>
-        <p>Ke ago aka?</p>
-        <p>No lo c vroh</p>
-      </div>
-
-      <ItemCount item={producto1} onAdd={onAdd}  />
+      <ItemCount item={producto1} onAdd={onAdd} carrito={carrito} setCarrito={setCarrito}  />
 
       <Footer />
 
