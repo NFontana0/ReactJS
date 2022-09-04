@@ -11,6 +11,8 @@ import { AccessAlarm, ThreeDRotation } from '@mui/icons-material';
 import Footer from './components/Footer';
 import ItemListContainer from './components/ItemListContainer';
 import ItemCount from './components/ItemCount';
+import FetchContainer from './components/FetchContainer';
+import ItemDetailContainer from './components/ItemDetailContainer';
 
 function App() {
 
@@ -29,12 +31,16 @@ function App() {
   return (
     <div className="App">
       <NavBar carrito={carrito} />
+      
+      {/*<FetchContainer />
 
-      <ItemListContainer />
+      <ItemListContainer />*/}
 
-      <ItemCount item={producto1} onAdd={onAdd} carrito={carrito} setCarrito={setCarrito}  />
+      <ItemDetailContainer />
 
-      <Footer />
+      {/* <ItemCount item={producto1} onAdd={onAdd} carrito={carrito} setCarrito={setCarrito}  />
+
+    <Footer /> */}
 
     </div>
   );
