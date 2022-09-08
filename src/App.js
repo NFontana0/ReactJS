@@ -14,36 +14,35 @@ import ItemCount from './components/ItemCount';
 import FetchContainer from './components/FetchContainer';
 import ItemDetailContainer from './components/ItemDetailContainer';
 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 function App() {
 
   function alertInicio() {
     alert("Bienvenidos!");
   }
-
-  let producto1 = { stock: 10, initial: 0};
-
-  const [carrito, setCarrito] = useState (producto1.initial);
-
-  function onAdd() {
-  }
   
 
   return (
-    <div className="App">
-      <NavBar carrito={carrito} />
-      
-      {/*<FetchContainer />
+<>
+      <BrowserRouter>
 
-      <ItemListContainer />*/}
+  { /*Aca van los componenes que estan presentes en todas las rutas*/}
+      <NavBar />
 
-      <ItemDetailContainer />
+        <Routes>
+          <Route path='/' element={<ItemListContainer />} />
+          <Route path='/category/:idcategory' element={<ItemListContainer />} />
+          <Route path='/product/:idproduct' element={<ItemDetailContainer />}/>
+        </Routes>
 
-      {/* <ItemCount item={producto1} onAdd={onAdd} carrito={carrito} setCarrito={setCarrito}  />
+  { /*Aca va el footer, tambien afuera de las rutas, porque tambien estan en todas las rutas*/}
+      <Footer /> 
 
-    <Footer /> */}
-
-    </div>
+      </BrowserRouter>
+    
+</> 
   );
-}
+} 
 
 export default App;

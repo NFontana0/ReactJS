@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Icon from './Icon';
+import { Link } from 'react-router-dom';
 
 export default function NavBar({carrito}) {
   return (
@@ -19,11 +20,18 @@ export default function NavBar({carrito}) {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-          >
-            <MenuIcon />
+          >   
+
+            
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+          
+            <Link to="/" className="cardNavbar">HOME</Link>
+            <Link to="/category/remeras" className="cardNavbar">Remeras</Link>  
+            <Link to="/category/pantalones" className="cardNavbar">Pantalones</Link>  
+            <Link to="/category/zapatillas" className="cardNavbar">Zapatillas</Link>
+            <Link to="/product/remeraadidas" className="cardNavbar">Remera Adidas</Link>
+
           </Typography>
           <Box sx={{ flexGrow: 0 }}>
             <Icon carrito={carrito} />

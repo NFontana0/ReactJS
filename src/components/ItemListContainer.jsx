@@ -1,43 +1,51 @@
 import React, {useState, useEffect} from "react"
 import ItemList from "./ItemList";
+import { useParams } from "react-router-dom";
+import CircularProgress from '@mui/material/CircularProgress';
+import {promesaProductos} from '../mocks/mockData'
+
 
 export default function ItemListContainer( ) {
 
+    const { idcategory } = useParams();
     const [loading, setLoading] = useState (true);
     const [productos, setProductos] = useState ([]);
     const [error, setError] = useState ('');
 
 useEffect (() => { 
-    let promesaProductos = new Promise( (res, rej) => {
-    setTimeout (() => {
-        res([
-            { cod:1, name: 'Remera', price: 3500 },
-            { cod:2, name: 'Cinturon', price: 1700 },
-            { cod:3, name: 'Pantalon', price: 8000 },
-            { cod:4, name: 'Medias', price: 750 },
-            { cod:5, name: 'Zapatillas', price: 15000 },
-        ]);
-    }, 2000);
-});
+        
+    if(!idcategory){
+        //Aca estoy en la home, muestro todo
+        
+        promesaProductos
+            .then((res) => {
+                setProductos(res);}
+                )
+            .catch((err) => {
+                setError(err);}
+                )
+            .finally(() => {
+                setLoading(false);}
+        ); } 
 
-promesaProductos
-    .then((res) => {
-        setProductos(res);}
-        )
-    .catch((err) => {
-        setError(err);}
-        )
-    .finally(() => {
-        setLoading(false);}
+        else {
+            //Aca estoy en una categoria, hay que filtrar
+            promesaProductos
+            .then((res) => {
+                setProductos(res.filter((producto) => producto.idcategory === idcategory));}
+                )
+            .catch((err) => {
+                setError(err);}
+                )
+            .finally(() => {
+                setLoading(false);}
         );
-    })
-    
-return (
-    <div>
-        <p>Loading: {loading ? 'Loading...' : 'Fin de carga'}</p>
-        <p>Error: {error ? error : null}</p>
-        <ItemList productos={productos}  />
+};}, [idcategory]);
 
+
+return (
+    <div className="cardContainer">
+        <p>Productos: {loading ? <CircularProgress /> : <ItemList productos={productos}  />}</p>
     </div>
 );
 }
