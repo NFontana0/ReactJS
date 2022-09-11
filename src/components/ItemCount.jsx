@@ -1,17 +1,8 @@
 import React, {useState, useEffect} from "react"
-import NavBar from "./NavBar";
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
-export default function ItemCount( {stock, initial} ) {
+export default function ItemCount( {stock, initial, onAdd, carrito, setCarrito} ) {
     
-    //El carrito lo defini en la App.js para poder usar el totalizador de carrito directamente en el Icono que muestra el NavBar.
-
-const [carrito, setCarrito] = useState (initial);
-
-function onAdd() {}
-
-
 const agregar = () => {
     if(carrito < stock) {
         setCarrito(carrito + 1);
