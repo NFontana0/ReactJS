@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import Icon from './Icon';
+import CartWidget from './CartWidget';
 import { Link } from 'react-router-dom';
 
 export default function NavBar({carrito}) {
@@ -31,9 +31,9 @@ export default function NavBar({carrito}) {
             <Link to="/product/remeraadidas" className="cardNavbar">Remera Adidas</Link>
 
           </Typography>
-          <Box sx={{ flexGrow: 0 }}>
-            <Icon carrito={carrito} />
-          </Box>
+          <Link to='/cart'>
+            <CartWidget />
+          </Link>
         </Toolbar>
       </AppBar>
     </Box>
