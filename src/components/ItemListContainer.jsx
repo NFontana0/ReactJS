@@ -3,49 +3,36 @@ import ItemList from "./ItemList";
 import { useParams } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 import {promesaProductos} from '../mocks/mockData'
-
+import { collection, getDocs, query, where } from "firebase/firestore"
+import { db } from "../firebase/firebase"
 
 export default function ItemListContainer( ) {
 
-    const { idcategory } = useParams();
-    const [loading, setLoading] = useState (true);
-    const [productos, setProductos] = useState ([]);
-    const [error, setError] = useState ('');
+    const [productList, setProductList] = useState ([]);
+    const [loading, setLoading] = useState (false);
+    const { id, categoriaId } = useParams();
 
 useEffect (() => { 
-        
-    if(!idcategory){
-        //Aca estoy en la home, muestro todo
-        
-        promesaProductos
-            .then((res) => {
-                setProductos(res);}
-                )
-            .catch((err) => {
-                setError(err);}
-                )
-            .finally(() => {
-                setLoading(false);}
-        ); } 
-
-        else {
-            //Aca estoy en una categoria, hay que filtrar
-            promesaProductos
-            .then((res) => {
-                setProductos(res.filter((producto) => producto.idcategory === idcategory));}
-                )
-            .catch((err) => {
-                setError(err);}
-                )
-            .finally(() => {
-                setLoading(false);}
-        );
-};}, [idcategory]);
+    setLoading(true)
+    const productos = categoriaId ? query(collection(db, "products"), where("category", "==", categoriaId)) :collection(db, "products")
+    getDocs(productos)
+    .then((result)=>{
+        const lista = result.docs.map((product)=> {
+            return{
+                id:product.id,
+                ...product.data()
+            }
+        })
+        setProductList(lista)
+    })
+    .catch((error)=>console.log(error))
+    .finally(()=>setLoading(false))
+}, [categoriaId])
 
 
 return (
     <div className="cardContainer">
-        <p>Productos: {loading ? <CircularProgress /> : <ItemList productos={productos}  />}</p>
+        <p>Productos: {loading ? <CircularProgress /> : <ItemList productList={productList}  />}</p>
     </div>
 );
 }

@@ -4,9 +4,9 @@ import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
 import { useCart } from '../context/CartContext'
 
-export default function ItemDetail ( {producto} ) {
+export default function ItemDetail ( {productDetail} ) {
     
-const {id, name, price, stock, idcategory, idproduct, img} = producto
+const {id, name, price, stock, img, descripcion} = productDetail;
 const [compra, setCompra] = useState (false);
 const [carrito, setCarrito] = useState (0);
 const navegar = useNavigate()
@@ -18,9 +18,8 @@ const onAdd = () => {
         name,
         price,
         stock,
-        idcategory,
-        idproduct,
         img,
+        descripcion,
         quantity:carrito
     }
     setCompra(true)
@@ -30,10 +29,10 @@ const onAdd = () => {
     return (
     <div>
             <div className="cardDetail" style= {{border: '2px solid grey'}}>
-            <p style={{ color: "red" }}>Producto: {id}</p>
-            <p>Nombre: {name}</p>
+            <p style={{ color: "red" }}>Producto: {name}</p>
+            <p>Descripcion: {descripcion}</p>
             <p>Precio: {price}</p>
-            {img}
+            <img src= {img} />
             { !compra
             ? <ItemCount stock={stock} initial={0} onAdd={onAdd} carrito={carrito} setCarrito={setCarrito}/>
             :   <div className="d-flex justify-content-center mt-2">

@@ -6,8 +6,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from "react-router-dom";
 
-export default function Item( {item, idproduct} ) {
+export default function Item( {product} ) {
 
+    const {id, name, price, stock, img, descripcion} = product;    
     const navegar = useNavigate()
     const bull = (
         <Box
@@ -22,22 +23,19 @@ export default function Item( {item, idproduct} ) {
         <React.Fragment>
         <CardContent>
             <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Producto: {item.id}
+            Producto: {name}
             </Typography>
             <Typography variant="h5" component="div">
-            Nombre: {item.name}
-            </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Descripcion: 
+            Descripcion: {descripcion}
             </Typography>
             <Typography variant="body2">
-            Precio: ${item.price}
+            Precio: ${price}
             </Typography>
             <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Stock: {item.stock}
+            Stock: {stock}
             </Typography>
             <div className="d-flex justify-content-center mt-2">
-            <Button variant="outlined" size="small" color="secondary"  onClick={()=>navegar(`/product/${idproduct}`)}>
+            <Button variant="outlined" size="small" color="secondary"  onClick={()=>navegar(`/product/${id}`)}>
             VER MAS 
             </Button>
         </div>

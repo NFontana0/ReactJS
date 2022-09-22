@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from "react"
 import Item from "./Item";
 
-export default function ItemList( {productos} ) {
+export default function ItemList( {productList} ) {
     
 
 
     return (
     <div className="cardContainer">
-        {productos.map((item) => (
-            <Item productos={productos} item={item} idproduct={item.idproduct} />
+        {productList.map((product) => (
+            <Item key={product.id} product={product} />
         ))}
     </div>
     );
